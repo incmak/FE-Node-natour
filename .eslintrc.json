@@ -1,0 +1,62 @@
+{
+  "env" : {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  // "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "prettier"
+  ],    
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "airbnb",
+    "airbnb/hooks",
+    "prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "semi": false
+      }
+    ],
+    "spaced-comment": "off",
+        "no-console": "warn",
+        "consistent-return": "off",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "no-process-exit": "off",
+        "no-param-reassign": "off",
+        "no-return-await": "off",
+        "no-underscore-dangle": "off",
+        "class-methods-use-this": "off",
+        "import/prefer-default-export": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }]
+  }
+}
