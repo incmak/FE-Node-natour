@@ -5,6 +5,7 @@ import Layout from './Layout/Layout'
 
 const Login = lazy(() => import('./pages/Login/Login')) //Lazy load example
 const Home = lazy(() => import('./pages/Home/Home'))
+const SignUp = lazy(() => import('./pages/SignUp/SignUp'))
 
 export const routesList = [
   {
@@ -22,7 +23,7 @@ export const routesList = [
           <Suspense
             // use a children spinner here
             fallback={
-              <div className="bg-blue-500 h-[100dvh] w-screen">Loading...</div>
+              <div className="h-[100dvh] w-screen bg-blue-500">Loading...</div>
             }
           >
             <Home />
@@ -41,6 +42,19 @@ export const routesList = [
         }
       >
         <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: '/signup',
+    element: (
+      <Suspense
+        fallback={
+          // use a normal full screen spinner here
+          <div className="h-[100dvh] w-screen bg-green-300">Loading...</div>
+        }
+      >
+        <SignUp />
       </Suspense>
     ),
   },
