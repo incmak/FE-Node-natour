@@ -2,26 +2,26 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { login } from '../../API/API'
+import { forgotPassword } from '../../API/API'
+import InfoPopup from '../../components/InfoPopup'
 
-export default function Login() {
+export default function ForgotPassword() {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { email, password } = e.target.elements
+    const { email } = e.target.elements
     const data = {
       email: email.value,
-      password: password.value,
     }
     try {
       setIsLoading(true)
-      const res = await login(data)
+      const res = await forgotPassword(data)
       if (res.status === 200) {
-        toast('Login Success')
-        localStorage.setItem('token', res.data.token)
-        navigate('/')
+        setIsSuccess(true)
+        toast.success('Email sent successfully')
       }
     } catch (error) {
       toast.error(error.response.data.message)
@@ -35,6 +35,13 @@ export default function Login() {
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <InfoPopup
+        isOpen={isSuccess}
+        setIsOpen={setIsSuccess}
+        message="We have sent a password reset link to your email address.
+                    Please check your email (spam/unwanted)."
+        title="Email Sent"
+      />
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-10 w-auto"
@@ -68,35 +75,6 @@ export default function Login() {
           </div>
 
           <div>
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
-              >
-                Password
-              </label>
-              <div className="text-sm">
-                <Link
-                  to="/forgot-password"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-
-          <div>
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -122,7 +100,7 @@ export default function Login() {
                   />
                 </svg>
               ) : (
-                'Login'
+                'Reset Password'
               )}
             </button>
           </div>

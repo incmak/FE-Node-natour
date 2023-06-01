@@ -6,6 +6,10 @@ import Layout from './Layout/Layout'
 const Login = lazy(() => import('./pages/Login/Login')) //Lazy load example
 const Home = lazy(() => import('./pages/Home/Home'))
 const SignUp = lazy(() => import('./pages/SignUp/SignUp'))
+const ForgotPassword = lazy(() =>
+  import('./pages/ForgotPassword/ForgotPassword'),
+)
+const ResetPassword = lazy(() => import('./pages/ResetPassword/ResetPassword'))
 
 export const routesList = [
   {
@@ -55,6 +59,32 @@ export const routesList = [
         }
       >
         <SignUp />
+      </Suspense>
+    ),
+  },
+  {
+    path: '/forgot-password',
+    element: (
+      <Suspense
+        fallback={
+          // use a normal full screen spinner here
+          <div className="h-[100dvh] w-screen bg-green-300">Loading...</div>
+        }
+      >
+        <ForgotPassword />
+      </Suspense>
+    ),
+  },
+  {
+    path: '/reset-password/:token',
+    element: (
+      <Suspense
+        fallback={
+          // use a normal full screen spinner here
+          <div className="h-[100dvh] w-screen bg-green-300">Loading...</div>
+        }
+      >
+        <ResetPassword />
       </Suspense>
     ),
   },
